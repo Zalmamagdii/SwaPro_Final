@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batch Image Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .upload-container {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .preview-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .preview-item {
+            width: 200px;
+            position: relative;
+        }
+        .preview-item img {
+            width: 100%;
+            height: auto;
+        }
+        .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+        }
+        #resultsTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        #resultsTable th, #resultsTable td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        #resultsTable th {
+            background-color: #f2f2f2;
+        }
+        .result-image {
+            max-width: 200px;
+            max-height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Batch Image Upload (Max 3 Images)</h1>
+    
+    <div class="upload-container">
+        <input type="file" id="imageInput" accept="image/*" multiple onchange="handleFileSelect(event)">
+        <p>Select up to 3 images</p>
+    </div>
+
+    <div class="preview-container" id="previewContainer"></div>
+
+    <button onclick="processImages()" id="processBtn" disabled>Process Images</button>
+
+    <table id="resultsTable">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Image Number</th>
+                <th>Original Image</th>
+                <th>Processed Image</th>
+            </tr>
+        </thead>
+        <tbody id="resultsBody"></tbody>
+    </table>
+
+    <script>
+        let selectedFiles = [];
+
+        function handleFileSelect(event) {
+            const files = event.target.files;
+            if (files.length > 3) {
+                alert('Please select maximum 3 images');
+                event.target.value = '';
+                return;
+            }
+
+            selectedFiles = Array.from(files);
+            displayPreviews();
+            document.getElementById('processBtn').disabled = false;
+        }
+
+        function displayPreviews() {
+            const container = document.getElementById('previewContainer');
+            container.innerHTML = '';
+
+            selectedFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const div = document.createElement('div');
+                    div.className = 'preview-item';
+                    div.innerHTML = `
+                        <img src="${e.target.result}" alt="Preview">
+                        <button class="remove-btn" onclick="removeImage(${index})">×</button>
+                    `;
+                    container.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function removeImage(index) {
+            selectedFiles.splice(index, 1);
+            displayPreviews();
+            document.getElementById('processBtn').disabled = selectedFiles.length === 0;
+        }
+
+        async function processImages() {
+            const formData = new FormData();
+            selectedFiles.forEach(file => {
+                formData.append('images', file);
+            });
+
+            try {
+                const response = await fetch('http://localhost:5000/process-images', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    displayResults(data.results);
+                } else {
+                    alert('Error processing images: ' + data.error);
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        function displayResults(results) {
+            const tbody = document.getElementById('resultsBody');
+            tbody.innerHTML = '';
+
+            results.forEach((result, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${result.timestamp}</td>
+                    <td>${result.image_number}</td>
+                    <td><img src="${URL.createObjectURL(selectedFiles[index])}" class="result-image"></td>
+                    <td><img src="data:image/jpeg;base64,${result.result_image}" class="result-image"></td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html> 

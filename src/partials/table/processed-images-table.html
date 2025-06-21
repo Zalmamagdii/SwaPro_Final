@@ -1,0 +1,252 @@
+<div
+  class="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6"
+  x-data="{ 
+    processedImages: JSON.parse(localStorage.getItem('processedImages') || '[]'),
+    showModal: false,
+    selectedImage: null,
+    async downloadImage(imageUrl) {
+      try {
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `processed-image-${Date.now()}.jpg`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      } catch (error) {
+        console.error('Error downloading image:', error);
+      }
+    },
+    viewImage(image) {
+      this.selectedImage = image;
+      this.showModal = true;
+    }
+  }"
+>
+  <!-- Image View Modal -->
+  <div
+    x-show="showModal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+    @click.self="showModal = false"
+  >
+    <div
+      class="relative max-w-4xl w-full mx-4 bg-white rounded-lg shadow-xl dark:bg-gray-800"
+      x-transition:enter="transition ease-out duration-300"
+      x-transition:enter-start="opacity-0 transform scale-95"
+      x-transition:enter-end="opacity-100 transform scale-100"
+      x-transition:leave="transition ease-in duration-200"
+      x-transition:leave-start="opacity-100 transform scale-100"
+      x-transition:leave-end="opacity-0 transform scale-95"
+    >
+      <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">
+            Image Details
+          </h3>
+          <button
+            @click="showModal = false"
+            class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="p-4">
+        <div class="mb-4">
+          <img
+            :src="selectedImage?.url"
+            alt="Full size image"
+            class="w-full h-auto rounded-lg"
+          />
+        </div>
+        <div class="grid grid-cols-2 gap-4 text-sm mb-4">
+          <div>
+            <p class="text-gray-500 dark:text-gray-400">Country</p>
+            <p class="font-medium text-gray-800 dark:text-white/90" x-text="selectedImage?.country"></p>
+          </div>
+          <div>
+            <p class="text-gray-500 dark:text-gray-400">Model</p>
+            <p class="font-medium text-gray-800 dark:text-white/90" x-text="selectedImage?.model"></p>
+          </div>
+          <div>
+            <p class="text-gray-500 dark:text-gray-400">Date Processed</p>
+            <p class="font-medium text-gray-800 dark:text-white/90" x-text="selectedImage?.date"></p>
+          </div>
+        </div>
+        <div class="flex justify-center gap-4">
+          <button
+            @click="showModal = false"
+            class="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-6 py-3 text-theme-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200"
+          >
+            <svg class="stroke-current" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 5L5 15" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5 5L15 15" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Exit
+          </button>
+          <button
+            @click="
+              const index = processedImages.findIndex(img => img.url === selectedImage.url);
+              if (index !== -1) {
+                processedImages.splice(index, 1);
+                localStorage.setItem('processedImages', JSON.stringify(processedImages));
+                showModal = false;
+              }
+            "
+            class="inline-flex items-center gap-2 rounded-lg border border-red-300 bg-white px-6 py-3 text-theme-sm font-medium text-red-700 shadow-theme-xs hover:bg-red-50 hover:text-red-800 dark:border-red-700 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-red-900/[0.03] dark:hover:text-red-200"
+          >
+            <svg class="stroke-current" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 5L5 15" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5 5L15 15" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Remove Image
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-2 mb-4 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">
+        Processed Images
+      </h3>
+    </div>
+  </div>
+
+  <div class="w-full overflow-x-auto">
+    <table class="min-w-full">
+      <thead>
+        <tr class="border-gray-100 border-y dark:border-gray-800">
+          <th class="py-3">
+            <div class="flex items-center">
+              <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                Image
+              </p>
+            </div>
+          </th>
+          <th class="py-3">
+            <div class="flex items-center">
+              <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                Country
+              </p>
+            </div>
+          </th>
+          <th class="py-3">
+            <div class="flex items-center">
+              <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                Model
+              </p>
+            </div>
+          </th>
+          <th class="py-3">
+            <div class="flex items-center">
+              <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                Date Processed
+              </p>
+            </div>
+          </th>
+          <th class="py-3">
+            <div class="flex items-center">
+              <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                Actions
+              </p>
+            </div>
+          </th>
+          <th class="py-3">
+            <div class="flex items-center">
+              <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                Remove
+              </p>
+            </div>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+        <template x-for="(image, index) in processedImages" :key="index">
+          <tr>
+            <td class="py-3">
+              <div class="flex items-center">
+                <div class="flex items-center gap-3">
+                  <div class="h-[50px] w-[50px] overflow-hidden rounded-md">
+                    <img :src="image.url" alt="Processed Image" class="w-10 h-auto rounded" />
+                  </div>
+                  <div>
+                    <p class="font-medium text-gray-800 text-theme-sm dark:text-white/90">
+                      Processed Image
+                    </p>
+                    <span class="text-gray-500 text-theme-xs dark:text-gray-400">
+                      <span x-text="image.date"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td class="py-3">
+              <div class="flex items-center">
+                <span class="text-gray-500 text-theme-xs dark:text-gray-400" x-text="image.country"></span>
+              </div>
+            </td>
+            <td class="py-3">
+              <div class="flex items-center">
+                <span class="text-gray-500 text-theme-xs dark:text-gray-400" x-text="image.model"></span>
+              </div>
+            </td>
+            <td class="py-3">
+              <div class="flex items-center">
+                <span class="text-gray-500 text-theme-xs dark:text-gray-400" x-text="image.date"></span>
+              </div>
+            </td>
+            <td class="py-3">
+              <div class="flex items-center gap-2">
+                <button
+                  @click="viewImage(image)"
+                  class="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200"
+                >
+                  <svg class="stroke-current" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 12.5C11.3807 12.5 12.5 11.3807 12.5 10C12.5 8.61929 11.3807 7.5 10 7.5C8.61929 7.5 7.5 8.61929 7.5 10C7.5 11.3807 8.61929 12.5 10 12.5Z" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M17.5 10C15.5 13.5 10 16.6667 10 16.6667C10 16.6667 4.5 13.5 2.5 10C4.5 6.5 10 3.33333 10 3.33333C10 3.33333 15.5 6.5 17.5 10Z" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  View
+                </button>
+                <button
+                  @click="downloadImage(image.url)"
+                  class="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200"
+                >
+                  <svg class="stroke-current" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 13.3333V3.33334" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13.3333 10L10 13.3333L6.66667 10" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16.6667 10V15C16.6667 15.442 16.4911 15.866 16.1785 16.1785C15.866 16.4911 15.442 16.6667 15 16.6667H5C4.55797 16.6667 4.13405 16.4911 3.82149 16.1785C3.50893 15.866 3.33334 15.442 3.33334 15V10" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Download
+                </button>
+                <button
+                  @click="processedImages.splice(index, 1); localStorage.setItem('processedImages', JSON.stringify(processedImages))"
+                  class="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200"
+                >
+                  <svg class="stroke-current" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 5L5 15" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5 5L15 15" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Remove
+                </button>
+              </div>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+  </div>
+</div> 

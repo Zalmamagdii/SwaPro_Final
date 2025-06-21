@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+  />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>
+    Synthesizing | SwaPro
+  </title>
+</head>
+<body
+  x-data="{ page: 'synthesizing', 'loaded': true, 'darkMode': false, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false, 'generating': false, 'selectedCountry': '', ...imageUpload() }"
+  x-init="
+         darkMode = JSON.parse(localStorage.getItem('darkMode'));
+         $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+  :class="{'dark bg-gray-900': darkMode === true}"
+>
+<!-- ===== Preloader Start ===== -->
+<include src="./partials/preloader.html"></include>
+<!-- ===== Preloader End ===== -->
+
+<!-- ===== Page Wrapper Start ===== -->
+<div class="flex h-screen overflow-hidden">
+  <!-- ===== Sidebar Start ===== -->
+  <include src="./partials/sidebar.html"></include>
+  <!-- ===== Sidebar End ===== -->
+
+  <!-- ===== Content Area Start ===== -->
+  <div
+    class="relative flex flex-col flex-1 overflow-x-hidden overflow-y-auto"
+  >
+    <!-- Small Device Overlay Start -->
+    <include src="./partials/overlay.html" />
+    <!-- Small Device Overlay End -->
+
+    <!-- ===== Header Start ===== -->
+    <include src="./partials/header.html" />
+    <!-- ===== Header End ===== -->
+
+    <!-- ===== Main Content Start ===== -->
+    <main>
+      <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
+        <div class="grid grid-cols-12 gap-4 md:gap-6">
+          <!-- Cards Container -->
+          <div class="col-span-12 grid grid-cols-12 gap-4 md:gap-6">
+            <!-- New Image Upload Card -->
+            <div class="col-span-12 xl:col-span-6">
+              <div class="rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5">
+                <div class="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
+                  <div class="flex w-full flex-wrap gap-3 sm:gap-5">
+                    <div class="flex min-w-47.5">
+                      <span class="mt-1 mr-2 flex h-4 w-full max-w-4 items-center justify-center rounded-full border border-primary">
+                        <span class="block h-2.5 w-full max-w-2.5 rounded-full bg-primary"></span>
+                      </span>
+                      <div class="w-full">
+                        <p class="font-semibold text-primary">Image Upload</p>
+                        <p class="text-sm font-medium">Upload your images here</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4">
+                  <div class="flex flex-col items-center justify-center w-full">
+                    <!-- Upload Area -->
+                    <label x-show="!imagePreview" for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                      <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                        </svg>
+                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                      </div>
+                      <input id="dropzone-file" type="file" class="hidden" accept="image/*" @change="handleImageUpload" />
+                    </label>
+
+                    <!-- Image Preview -->
+                    <div x-show="imagePreview" class="relative w-full h-64">
+                      <img :src="imagePreview" class="w-full h-full object-contain rounded-lg" alt="Preview" />
+                      <button @click="removeImage" class="absolute top-2 right-2 px-3 py-1 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- New Image Upload Card End -->
+
+            <!-- Country Selection Card -->
+            <div class="col-span-12 xl:col-span-6">
+              <div class="rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5">
+                <div class="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
+                  <div class="flex w-full flex-wrap gap-3 sm:gap-5">
+                    <div class="flex min-w-47.5">
+                      <span class="mt-1 mr-2 flex h-4 w-full max-w-4 items-center justify-center rounded-full border border-primary">
+                        <span class="block h-2.5 w-full max-w-2.5 rounded-full bg-primary"></span>
+                      </span>
+                      <div class="w-full">
+                        <p class="font-semibold text-primary">Country Selection</p>
+                        <p class="text-sm font-medium">Choose your country</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4">
+                  <div class="relative z-20 bg-transparent dark:bg-form-input">
+                    <select
+                      x-model="selectedCountry"
+                      @change="updateProgress()"
+                      class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    >
+                      <option value="">Select Country</option>
+                      <option value="IT">Italy</option>
+                      <option value="DE-BER">Berlin - Germany</option>
+                      <option value="DE-BAY">Bayern - Germany</option>
+                      <option value="EG">Egypt</option>
+                      <option value="IR">Iran</option>
+                      <option value="IQ">Iraq</option>
+                      <option value="QA">Qatar</option>
+                    </select>
+                    <span class="absolute top-1/2 right-4 z-30 -translate-y-1/2">
+                      <svg class="fill-current" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g opacity="0.8">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M5.29289 8.29289C5.68342 7.90237 6.31658 7.90237 6.70711 8.29289L12 13.5858L17.2929 8.29289C17.6834 7.90237 18.3166 7.90237 18.7071 8.29289C19.0976 8.68342 19.0976 9.31658 18.7071 9.70711L12.7071 15.7071C12.3166 16.0976 11.6834 16.0976 11.2929 15.7071L5.29289 9.70711C4.90237 9.31658 4.90237 8.68342 5.29289 8.29289Z" fill=""></path>
+                        </g>
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Country Selection Card End -->
+
+            <!-- Training Data Card -->
+            <div class="col-span-12 xl:col-span-6">
+              <div class="rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5">
+                <div class="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
+                  <div class="flex w-full flex-wrap gap-3 sm:gap-5">
+                    <div class="flex min-w-47.5">
+                      <span class="mt-1 mr-2 flex h-4 w-full max-w-4 items-center justify-center rounded-full border border-primary">
+                        <span class="block h-2.5 w-full max-w-2.5 rounded-full bg-primary"></span>
+                      </span>
+                      <div class="w-full">
+                        <p class="font-semibold text-primary">Training Data</p>
+                        <p class="text-sm font-medium">Select model and training data</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4 space-y-4">
+                  <!-- Model Selection -->
+                  <div class="relative z-20 bg-transparent dark:bg-form-input">
+                    <label class="mb-2.5 block text-black dark:text-white">
+                      Select Model
+                    </label>
+                    <select x-model="selectedModel" class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
+                      <option value="">Choose Model</option>
+                      <option value="vehicle">Vehicle Detection</option>
+                      <option value="license">License Plate Detection</option>
+                      <option value="ocr">OCR (Text Recognition)</option>
+                      <option value="face">Face Detection</option>
+                      <option value="object">Object Detection</option>
+                      <option value="custom">Custom Model</option>
+                    </select>
+                    <span class="absolute top-1/2 right-4 z-30 -translate-y-1/2">
+                      <svg class="fill-current" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g opacity="0.8">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M5.29289 8.29289C5.68342 7.90237 6.31658 7.90237 6.70711 8.29289L12 13.5858L17.2929 8.29289C17.6834 7.90237 18.3166 7.90237 18.7071 8.29289C19.0976 8.68342 19.0976 9.31658 18.7071 9.70711L12.7071 15.7071C12.3166 16.0976 11.6834 16.0976 11.2929 15.7071L5.29289 9.70711C4.90237 9.31658 4.90237 8.68342 5.29289 8.29289Z" fill=""></path>
+                        </g>
+                      </svg>
+                    </span>
+                  </div>
+
+                  <!-- Model Description -->
+                  <div class="mt-4">
+                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                      <span x-show="selectedModel === 'vehicle'">Vehicle Detection: Detects and classifies different types of vehicles in images and videos.</span>
+                      <span x-show="selectedModel === 'license'">License Plate Detection: Identifies and extracts license plate information from images.</span>
+                      <span x-show="selectedModel === 'ocr'">OCR: Extracts text from images and documents with high accuracy.</span>
+                      <span x-show="selectedModel === 'face'">Face Detection: Detects and analyzes human faces in images and videos.</span>
+                      <span x-show="selectedModel === 'object'">Object Detection: Identifies and locates multiple objects within an image.</span>
+                      <span x-show="selectedModel === 'custom'">Custom Model: Train a model according to your specific requirements.</span>
+                    </p>
+                  </div>
+
+                  <!-- Start Training Button -->
+                  <div class="mt-6">
+                    <button @click="startTraining" class="flex w-full justify-center rounded bg-primary p-3 font-medium text-white hover:bg-opacity-90">
+                      Start Training
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Training Data Card End -->
+
+          </div>
+          <!-- Cards Container End -->
+        </div>
+      </div>
+    </main>
+  </div>
+  <!-- ===== Content Area End ===== -->
+</div>
+<!-- ===== Page Wrapper End ===== -->
+
+<script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.data('imageUpload', () => ({
+      imagePreview: null,
+      handleImageUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            this.imagePreview = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      },
+      removeImage() {
+        this.imagePreview = null;
+        document.getElementById('dropzone-file').value = '';
+      }
+    }));
+  });
+</script>
+</body>
+</html> 

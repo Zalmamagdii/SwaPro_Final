@@ -7,20 +7,10 @@
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Statistics | SwaPro</title>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <style>
-        .animate-spin {
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-    </style>
+    <title>Sign In | SwaPro</title>
   </head>
   <body
-  x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': false, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false, 'generating': false, 'selectedCountry': '', ...imageUpload(), ...licensePlateEvaluator() }"
+    x-data="{ page: 'comingSoon', 'loaded': true, 'darkMode': false, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
     x-init="
          darkMode = JSON.parse(localStorage.getItem('darkMode'));
          $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
@@ -31,672 +21,249 @@
     <!-- ===== Preloader End ===== -->
 
     <!-- ===== Page Wrapper Start ===== -->
-<div class="flex h-screen overflow-hidden">
-  <!-- ===== Sidebar Start ===== -->
-  <include src="./partials/sidebar.html"></include>
-  <!-- ===== Sidebar End ===== -->
-
-  <!-- ===== Content Area Start ===== -->
-  <div
-    class="relative flex flex-col flex-1 overflow-x-hidden overflow-y-auto"
-  >
-    <!-- Small Device Overlay Start -->
-    <include src="./partials/overlay.html" />
-    <!-- Small Device Overlay End -->
-
-    <!-- ===== Header Start ===== -->
-    <include src="./partials/header.html" />
-    <!-- ===== Header End ===== -->
-
-    <!-- ===== Main Content Start ===== -->
-    <main>
-      <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
-        <div class="grid grid-cols-12 gap-4 md:gap-6">
-          <div class="col-span-12 space-y-6 xl:col-span-7">
-            <!-- Metric Group One -->
-            <include src="./partials/metric-group/metric-group-01.html" />
-            <!-- Metric Group One -->
-
-            <!-- ====== Map One Start -->
-            <div class="h-[calc(100%-6rem)]">
-              <include src="./partials/map-01.html" />
-            </div>
-            <!-- ====== Map One End -->
+    <div class="relative p-6 bg-white z-1 dark:bg-gray-900 sm:p-0">
+      <div
+        class="relative flex flex-col justify-center w-full h-screen dark:bg-gray-900 sm:p-0 lg:flex-row"
+      >
+        <!-- Form -->
+        <div class="flex flex-col flex-1 w-full lg:w-1/2 h-screen">
+          <div class="w-full max-w-md pt-10 mx-auto">
+            <a
+              href="dashboard.html"
+              class="inline-flex items-center text-sm text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+            >
+              <svg
+                class="stroke-current"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+              >
+                <path
+                  d="M12.7083 5L7.5 10.2083L12.7083 15.4167"
+                  stroke=""
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              
+            </a>
           </div>
-          <div class="col-span-12 xl:col-span-5">
-            <!-- ====== License Plate Evaluator Start ====== -->
-            <div class="bg-white rounded-lg shadow-lg p-6 h-[465px] overflow-y-auto flex flex-col">
-              <div class="text-center mb-6 flex-shrink-0">
-                <div class="flex items-center justify-center mb-4">
-                  <i data-lucide="shield" class="h-8 w-8 text-blue-600 mr-2"></i>
+          <div class="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
+            <div class="w-full p-4">
+              <span class="mb-1.5 block font-medium">Start for free</span>
+              <h2 class="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
+                Sign In to SwaPro
+              </h2>
+              <div>
+                <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5">
+                  <button
+                    class="inline-flex items-center justify-center gap-3 py-3 text-sm font-normal text-gray-700 transition-colors bg-gray-100 rounded-lg px-7 hover:bg-gray-200 hover:text-gray-800 dark:bg-white/5 dark:text-white/90 dark:hover:bg-white/10"
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18.7511 10.1944C18.7511 9.47495 18.6915 8.94995 18.5626 8.40552H10.1797V11.6527H15.1003C15.0011 12.4597 14.4654 13.675 13.2749 14.4916L13.2582 14.6003L15.9087 16.6126L16.0924 16.6305C17.7788 15.1041 18.7511 12.8583 18.7511 10.1944Z"
+                        fill="#4285F4"
+                      />
+                      <path
+                        d="M10.1788 18.75C12.5895 18.75 14.6133 17.9722 16.0915 16.6305L13.274 14.4916C12.5201 15.0068 11.5081 15.3666 10.1788 15.3666C7.81773 15.3666 5.81379 13.8402 5.09944 11.7305L4.99473 11.7392L2.23868 13.8295L2.20264 13.9277C3.67087 16.786 6.68674 18.75 10.1788 18.75Z"
+                        fill="#34A853"
+                      />
+                      <path
+                        d="M5.10014 11.7305C4.91165 11.186 4.80257 10.6027 4.80257 9.99992C4.80257 9.3971 4.91165 8.81379 5.09022 8.26935L5.08523 8.1534L2.29464 6.02954L2.20333 6.0721C1.5982 7.25823 1.25098 8.5902 1.25098 9.99992C1.25098 11.4096 1.5982 12.7415 2.20333 13.9277L5.10014 11.7305Z"
+                        fill="#FBBC05"
+                      />
+                      <path
+                        d="M10.1789 4.63331C11.8554 4.63331 12.9864 5.34303 13.6312 5.93612L16.1511 3.525C14.6035 2.11528 12.5895 1.25 10.1789 1.25C6.68676 1.25 3.67088 3.21387 2.20264 6.07218L5.08953 8.26943C5.81381 6.15972 7.81776 4.63331 10.1789 4.63331Z"
+                        fill="#EB4335"
+                      />
+                    </svg>
+                    Sign in with Google
+                  </button>
+                  <button
+                    class="inline-flex items-center justify-center gap-3 py-3 text-sm font-normal text-gray-700 transition-colors bg-gray-100 rounded-lg px-7 hover:bg-gray-200 hover:text-gray-800 dark:bg-white/5 dark:text-white/90 dark:hover:bg-white/10"
+                  >
+                    <svg
+                      width="21"
+                      class="fill-current"
+                      height="20"
+                      viewBox="0 0 21 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M15.6705 1.875H18.4272L12.4047 8.75833L19.4897 18.125H13.9422L9.59717 12.4442L4.62554 18.125H1.86721L8.30887 10.7625L1.51221 1.875H7.20054L11.128 7.0675L15.6705 1.875ZM14.703 16.475H16.2305L6.37054 3.43833H4.73137L14.703 16.475Z"
+                      />
+                    </svg>
+
+                    Sign in with X
+                  </button>
+                </div>
+                <div class="relative py-3 sm:py-5">
+                  <div class="absolute inset-0 flex items-center">
+                    <div
+                      class="w-full border-t border-gray-200 dark:border-gray-800"
+                    ></div>
+                  </div>
+                  <div class="relative flex justify-center text-sm">
+                    <span
+                      class="p-2 text-gray-400 bg-white dark:bg-gray-900 sm:px-5 sm:py-2"
+                      >Or</span
+                    >
+                  </div>
+                </div>
+                <form id="signin-form" class="space-y-5">
                   <div>
-                    <h2 class="text-xl font-bold text-gray-900">Processed Images Analyzer</h2>
-                    <p class="text-gray-600 text-sm">AI-powered manipulation detection for processed images</p>
+                    <label
+                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                    >
+                      Email<span class="text-error-500">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      placeholder="Enter your email"
+                      required
+                      class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                    />
                   </div>
-                </div>
-              </div>
-
-              <!-- Processed Images Display -->
-              <div id="uploadArea" class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-blue-400 transition-colors mb-4 flex-shrink-0">
-                <div id="uploadContent" class="space-y-3">
-                  <i data-lucide="database" class="mx-auto h-12 w-12 text-gray-400"></i>
                   <div>
-                    <p class="text-sm font-medium text-gray-900 mb-1">No Processed Images Available</p>
-                    <p class="text-xs text-gray-600 mb-2">Process some images first to analyze them</p>
-                    <div class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-gray-500 bg-gray-100">
-                      <i data-lucide="info" class="h-3 w-3 mr-1"></i>
-                      No Images
-                    </div>
+                    <label
+                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                    >
+                      Password<span class="text-error-500">*</span>
+                    </label>
+                    <input
+                      type="password"
+                      id="password"
+                      placeholder="Enter your password"
+                      required
+                      class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                    />
                   </div>
-                </div>
-              </div>
-
-              <!-- Analysis Button -->
-              <div id="analysisButton" class="text-center mb-4 flex-shrink-0" style="display: none;">
-                <div class="flex justify-center space-x-2">
-                  <button id="refreshBtn" class="inline-flex items-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                    <i data-lucide="refresh-cw" class="h-4 w-4 mr-2"></i>
-                    Refresh Images
-                  </button>
-                  <button id="analyzeBtn" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl">
-                    <i data-lucide="zap" class="h-4 w-4 mr-2"></i>
-                    Analyze
-                  </button>
-                </div>
-              </div>
-
-              <!-- Analysis Results -->
-              <div id="analysisResults" class="flex-1 overflow-y-auto" style="display: none;">
-                <!-- Main Result -->
-                <div id="mainResult" class="bg-gradient-to-r from-gray-50 to-blue-50 rounded-lg p-4 mb-4">
-                  <!-- Results will be populated here -->
-                </div>
-
-                <!-- Quick Analysis -->
-                <div class="mb-4">
-                  <h4 class="text-sm font-semibold text-gray-900 mb-2 flex items-center">
-                    <i data-lucide="bar-chart-3" class="h-4 w-4 mr-1"></i>
-                    Quick Analysis
-                  </h4>
-                  
-                  <div id="quickAnalysis" class="space-y-2 max-h-32 overflow-y-auto">
-                    <!-- Quick analysis items will be populated here -->
+                  <div class="flex flex-col gap-4">
+                    <button
+                      type="submit"
+                      class="flex w-full justify-center rounded-lg bg-blue-600 p-4 font-bold text-white hover:bg-blue-700 text-lg shadow-lg"
+                    >
+                      Sign In
+                    </button>
                   </div>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="flex justify-center space-x-2 pb-4">
-                  <button id="exportBtn" class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200">
-                    <i data-lucide="download" class="h-3 w-3 mr-1"></i>
-                    Export
-                  </button>
-                  <button id="fullAnalysisBtn" class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
-                    <i data-lucide="external-link" class="h-3 w-3 mr-1"></i>
-                    Full Analysis
-                  </button>
+                </form>
+                <div class="mt-4 text-center">
+                  <p class="font-medium">
+                    Don't have any account?
+                    <a class="text-primary hover:underline" href="signup.html">
+                      Sign Up
+                    </a>
+                  </p>
                 </div>
               </div>
             </div>
-            <!-- ====== License Plate Evaluator End ====== -->
+          </div>
         </div>
 
-          <div class="col-span-12">
-            <!-- ====== Processed Images Table Start ====== -->
-            <include src="./partials/table/processed-images-table.html" />
-            <!-- ====== Processed Images Table End ====== -->
+        <div
+          class="relative items-center hidden w-full h-screen bg-brand-950 dark:bg-white/5 lg:grid lg:w-1/2"
+        >
+          <div class="flex items-center justify-center z-1">
+            <!-- ===== Common Grid Shape Start ===== -->
+            <include src="./partials/common-grid-shape.html"></include>
+            <div class="flex flex-col items-center max-w-xs">
+              <a href="index.html" class="block mb-4">
+                <img src="./images/logo/SwaPro-white.svg" alt="SwaPro Logo" class="w-[180px]" />
+              </a>
+              <p class="text-center text-gray-400 dark:text-white/60">
+                Redefine Creativity by Swapping the Extraordinary!
+              </p>
+            </div>
           </div>
+        </div>
+        <!-- Toggler -->
+        <div class="fixed z-50 hidden bottom-6 right-6 sm:block">
+          <button
+            class="inline-flex items-center justify-center text-white transition-colors rounded-full size-14 bg-brand-500 hover:bg-brand-600"
+            @click.prevent="darkMode = !darkMode"
+          >
+            <svg
+              class="hidden fill-current dark:block"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M9.99998 1.5415C10.4142 1.5415 10.75 1.87729 10.75 2.2915V3.5415C10.75 3.95572 10.4142 4.2915 9.99998 4.2915C9.58577 4.2915 9.24998 3.95572 9.24998 3.5415V2.2915C9.24998 1.87729 9.58577 1.5415 9.99998 1.5415ZM10.0009 6.79327C8.22978 6.79327 6.79402 8.22904 6.79402 10.0001C6.79402 11.7712 8.22978 13.207 10.0009 13.207C11.772 13.207 13.2078 11.7712 13.2078 10.0001C13.2078 8.22904 11.772 6.79327 10.0009 6.79327ZM5.29402 10.0001C5.29402 7.40061 7.40135 5.29327 10.0009 5.29327C12.6004 5.29327 14.7078 7.40061 14.7078 10.0001C14.7078 12.5997 12.6004 14.707 10.0009 14.707C7.40135 14.707 5.29402 12.5997 5.29402 10.0001ZM15.9813 5.08035C16.2742 4.78746 16.2742 4.31258 15.9813 4.01969C15.6884 3.7268 15.2135 3.7268 14.9207 4.01969L14.0368 4.90357C13.7439 5.19647 13.7439 5.67134 14.0368 5.96423C14.3297 6.25713 14.8045 6.25713 15.0974 5.96423L15.9813 5.08035ZM18.4577 10.0001C18.4577 10.4143 18.1219 10.7501 17.7077 10.7501H16.4577C16.0435 10.7501 15.7077 10.4143 15.7077 10.0001C15.7077 9.58592 16.0435 9.25013 16.4577 9.25013H17.7077C18.1219 9.25013 18.4577 9.58592 18.4577 10.0001ZM14.9207 15.9806C15.2135 16.2735 15.6884 16.2735 15.9813 15.9806C16.2742 15.6877 16.2742 15.2128 15.9813 14.9199L15.0974 14.036C14.8045 13.7431 14.3297 13.7431 14.0368 14.036C13.7439 14.3289 13.7439 14.8038 14.0368 15.0967L14.9207 15.9806ZM9.99998 15.7088C10.4142 15.7088 10.75 16.0445 10.75 16.4588V17.7088C10.75 18.123 10.4142 18.4588 9.99998 18.4588C9.58577 18.4588 9.24998 18.123 9.24998 17.7088V16.4588C9.24998 16.0445 9.58577 15.7088 9.99998 15.7088ZM5.96356 15.0972C6.25646 14.8043 6.25646 14.3295 5.96356 14.0366C5.67067 13.7437 5.1958 13.7437 4.9029 14.0366L4.01902 14.9204C3.72613 15.2133 3.72613 15.6882 4.01902 15.9811C4.31191 16.274 4.78679 16.274 5.07968 15.9811L5.96356 15.0972ZM4.29224 10.0001C4.29224 10.4143 3.95645 10.7501 3.54224 10.7501H2.29224C1.87802 10.7501 1.54224 10.4143 1.54224 10.0001C1.54224 9.58592 1.87802 9.25013 2.29224 9.25013H3.54224C3.95645 9.25013 4.29224 9.58592 4.29224 10.0001ZM4.9029 5.9637C5.1958 6.25659 5.67067 6.25659 5.96356 5.9637C6.25646 5.6708 6.25646 5.19593 5.96356 4.90303L5.07968 4.01915C4.78679 3.72626 4.31191 3.72626 4.01902 4.01915C3.72613 4.31204 3.72613 4.78692 4.01902 5.07981L4.9029 5.9637Z"
+                fill=""
+              />
+            </svg>
+            <svg
+              class="fill-current dark:hidden"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M17.4547 11.97L18.1799 12.1611C18.265 11.8383 18.1265 11.4982 17.8401 11.3266C17.5538 11.1551 17.1885 11.1934 16.944 11.4207L17.4547 11.97ZM8.0306 2.5459L8.57989 3.05657C8.80718 2.81209 8.84554 2.44682 8.67398 2.16046C8.50243 1.8741 8.16227 1.73559 7.83948 1.82066L8.0306 2.5459ZM12.9154 13.0035C9.64678 13.0035 6.99707 10.3538 6.99707 7.08524H5.49707C5.49707 11.1823 8.81835 14.5035 12.9154 14.5035V13.0035ZM16.944 11.4207C15.8869 12.4035 14.4721 13.0035 12.9154 13.0035V14.5035C14.8657 14.5035 16.6418 13.7499 17.9654 12.5193L16.944 11.4207ZM16.7295 11.7789C15.9437 14.7607 13.2277 16.9586 10.0003 16.9586V18.4586C13.9257 18.4586 17.2249 15.7853 18.1799 12.1611L16.7295 11.7789ZM10.0003 16.9586C6.15734 16.9586 3.04199 13.8433 3.04199 10.0003H1.54199C1.54199 14.6717 5.32892 18.4586 10.0003 18.4586V16.9586ZM3.04199 10.0003C3.04199 6.77289 5.23988 4.05695 8.22173 3.27114L7.83948 1.82066C4.21532 2.77574 1.54199 6.07486 1.54199 10.0003H3.04199ZM6.99707 7.08524C6.99707 5.52854 7.5971 4.11366 8.57989 3.05657L7.48132 2.03522C6.25073 3.35885 5.49707 5.13487 5.49707 7.08524H6.99707Z"
+                fill=""
+              />
+            </svg>
+          </button>
         </div>
       </div>
-    </main>
-  </div>
-  <!-- ===== Content Area End ===== -->
     </div>
     <!-- ===== Page Wrapper End ===== -->
 
     <script>
-  document.addEventListener('alpine:init', () => {
-    Alpine.data('imageUpload', () => ({
-      imagePreview: null,
-      uploadedImages: JSON.parse(localStorage.getItem('uploadedImages') || '[]'),
-      handleImageUpload(event) {
-        const file = event.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            this.imagePreview = e.target.result;
-          };
-          reader.readAsDataURL(file);
-        }
-      },
-      removeImage() {
-        this.imagePreview = null;
-        document.getElementById('dropzone-file').value = '';
-      },
-      downloadImage(imageUrl) {
-        const link = document.createElement('a');
-        link.href = imageUrl;
-        link.download = 'synthesized-image.png';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      },
-      removeImageFromTable(index) {
-        this.uploadedImages.splice(index, 1);
-        localStorage.setItem('uploadedImages', JSON.stringify(this.uploadedImages));
-      }
-    }));
-
-    Alpine.data('licensePlateEvaluator', () => ({
-      uploadedImages: [],
-      analysisResult: null,
-      isAnalyzing: false,
-      maxImages: 5,
-
-      init() {
-        // Initialize Lucide icons
-        lucide.createIcons();
-        
-        // Check for existing analysis data
-        this.checkForExistingAnalysis();
-        
-        // Load processed images automatically
-        this.loadProcessedImages();
-        
-        // Set up event listeners
-        this.setupEventListeners();
-      },
-
-      loadProcessedImages() {
-        try {
-          const processedImages = JSON.parse(localStorage.getItem('processedImages') || '[]');
-          
-          // Convert processed images to the format expected by the evaluator
-          this.uploadedImages = processedImages.slice(0, this.maxImages).map((img, index) => ({
-            id: Date.now() + index,
-            file: null, // We don't have the actual file, just the URL
-            url: img.url,
-            name: `Processed Image ${index + 1}`,
-            size: 0, // We don't have file size info
-            type: 'image/jpeg',
-            country: img.country,
-            model: img.model,
-            date: img.date
-          }));
-          
-          this.displayUploadedImages();
-          
-          // Show analysis button if we have images
-          if (this.uploadedImages.length > 0) {
-            const analysisButton = document.getElementById('analysisButton');
-            if (analysisButton) {
-              analysisButton.style.display = 'block';
-            }
-          }
-        } catch (error) {
-          console.error('Error loading processed images:', error);
-        }
-      },
-
-      checkForExistingAnalysis() {
-        const existingData = localStorage.getItem('fullAnalysisData');
-        if (existingData) {
-          try {
-            const data = JSON.parse(existingData);
-            this.analysisResult = data;
-            this.displayResults(this.analysisResult, '1.6s', '92%');
-            localStorage.removeItem('fullAnalysisData');
-          } catch (error) {
-            console.error('Error parsing existing analysis data:', error);
-          }
-        }
-      },
-
-      setupEventListeners() {
-        const analyzeBtn = document.getElementById('analyzeBtn');
-        const exportBtn = document.getElementById('exportBtn');
-        const fullAnalysisBtn = document.getElementById('fullAnalysisBtn');
-        const refreshBtn = document.getElementById('refreshBtn');
-
-        if (analyzeBtn) {
-          analyzeBtn.addEventListener('click', () => this.runAnalysis());
-        }
-        if (exportBtn) {
-          exportBtn.addEventListener('click', () => this.exportResults());
-        }
-        if (fullAnalysisBtn) {
-          fullAnalysisBtn.addEventListener('click', () => this.openFullAnalysis());
-        }
-        if (refreshBtn) {
-          refreshBtn.addEventListener('click', () => this.loadProcessedImages());
-        }
-      },
-
-      displayUploadedImages() {
-        const uploadContent = document.getElementById('uploadContent');
-        if (!uploadContent) return;
-        
-        if (this.uploadedImages.length === 0) {
-          uploadContent.innerHTML = `
-            <div class="space-y-3">
-              <i data-lucide="database" class="mx-auto h-12 w-12 text-gray-400"></i>
-              <div>
-                <p class="text-sm font-medium text-gray-900 mb-1">No Processed Images Available</p>
-                <p class="text-xs text-gray-600 mb-2">Process some images first to analyze them</p>
-                <div class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-gray-500 bg-gray-100">
-                  <i data-lucide="info" class="h-3 w-3 mr-1"></i>
-                  No Images
-                </div>
-              </div>
-            </div>
-          `;
-        } else {
-          const imagePreviews = this.uploadedImages.map((img, index) => `
-            <div class="relative group">
-              <img src="${img.url}" alt="Processed ${index + 1}" class="w-16 h-16 object-cover rounded-lg border-2 border-gray-200">
-              <div class="absolute -top-2 -right-2 bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                ${index + 1}
-              </div>
-              <div class="text-xs text-gray-600 mt-1 text-center">${img.country || 'Unknown'}</div>
-            </div>
-          `).join('');
-          
-          uploadContent.innerHTML = `
-            <div class="space-y-3">
-              <div class="text-sm font-medium text-gray-900">Processed Images (${this.uploadedImages.length}/${this.maxImages})</div>
-              <div class="grid grid-cols-5 gap-2">
-                ${imagePreviews}
-              </div>
-              <div class="text-xs text-gray-500 text-center">
-                Automatically loaded from processed images
-              </div>
-            </div>
-          `;
-        }
-        
-        const analysisButton = document.getElementById('analysisButton');
-        if (analysisButton) {
-          if (this.uploadedImages.length > 0) {
-            analysisButton.style.display = 'block';
-          } else {
-            analysisButton.style.display = 'none';
-          }
-        }
-        
-        lucide.createIcons();
-      },
-
-      hideAnalysisResults() {
-        const analysisResults = document.getElementById('analysisResults');
-        const analysisHistory = document.getElementById('analysisHistory');
-        
-        if (analysisResults) {
-          analysisResults.style.display = 'none';
-        }
-        if (analysisHistory) {
-          analysisHistory.style.display = 'none';
-        }
-      },
-
-      async analyzeImageAuthenticity(imageData) {
-        // Simulate analysis delay for each technique
-        const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-        
-        const techniques = {
-          jpegAnalysis: async () => {
-            await delay(100);
-            return {
-              score: Math.round(15 + Math.random() * 70),
-              details: `Compression artifacts: ${Math.round(Math.random() * 100)}%`,
-              confidence: 0.8
-            };
-          },
-          noiseAnalysis: async () => {
-            await delay(100);
-            return {
-              score: Math.round(20 + Math.random() * 60),
-              details: `Noise inconsistency: ${Math.round(Math.random() * 100)}%`,
-              confidence: 0.75
-            };
-          },
-          edgeAnalysis: async () => {
-            await delay(100);
-            return {
-              score: Math.round(10 + Math.random() * 80),
-              details: `Edge smoothing: ${Math.round(Math.random() * 100)}%`,
-              confidence: 0.85
-            };
-          },
-          lightingAnalysis: async () => {
-            await delay(100);
-            return {
-              score: Math.round(5 + Math.random() * 90),
-              details: `Lighting issues: ${Math.round(Math.random() * 100)}%`,
-              confidence: 0.9
-            };
-          },
-          metadataAnalysis: async () => {
-            await delay(100);
-            return {
-              score: Math.round(Math.random() * 100),
-              details: `Editing software: ${Math.random() > 0.7 ? 'Detected' : 'None'}`,
-              confidence: 0.6
-            };
-          },
-          frequencyAnalysis: async () => {
-            await delay(100);
-            return {
-              score: Math.round(20 + Math.random() * 60),
-              details: `DCT anomalies: ${Math.round(Math.random() * 100)}%`,
-              confidence: 0.8
-            };
-          },
-          colorAnalysis: async () => {
-            await delay(100);
-            return {
-              score: Math.round(10 + Math.random() * 70),
-              details: `Color histogram: ${Math.round(Math.random() * 100)}%`,
-              confidence: 0.7
-            };
-          },
-          textureAnalysis: async () => {
-            await delay(100);
-            return {
-              score: Math.round(15 + Math.random() * 65),
-              details: `Texture patterns: ${Math.round(Math.random() * 100)}%`,
-              confidence: 0.75
-            };
-          }
+      document.getElementById('signin-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = {
+          email: document.getElementById('email').value,
+          password: document.getElementById('password').value
         };
 
-        const results = {};
-        for (const [technique, analyzer] of Object.entries(techniques)) {
-          results[technique] = await analyzer();
-        }
-
-        return results;
-      },
-
-      async runAnalysis() {
-        if (this.uploadedImages.length === 0) {
-          alert('Please upload at least one image first.');
-          return;
-        }
-
-        this.isAnalyzing = true;
-        this.updateAnalyzeButton();
-
         try {
-          const startTime = Date.now();
-          const allResults = [];
-          
-          // Analyze each image
-          for (let i = 0; i < this.uploadedImages.length; i++) {
-            const imageResult = await this.analyzeImageAuthenticity(this.uploadedImages[i]);
-            allResults.push(imageResult);
-          }
-          
-          // Calculate average results across all images
-          const averageResults = this.calculateAverageResults(allResults);
-          
-          let totalScore = 0;
-          let totalWeight = 0;
-
-          Object.entries(averageResults).forEach(([technique, result]) => {
-            totalScore += result.score * result.confidence;
-            totalWeight += result.confidence;
+          const res = await fetch('http://localhost:5001/signin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
           });
 
-          const averageScore = totalScore / totalWeight;
-          const fakeConfidence = Math.round(averageScore);
-          const realConfidence = 100 - fakeConfidence;
+          const data = await res.json();
 
-          let riskLevel, riskColor, riskIcon;
-          if (fakeConfidence >= 80) {
-            riskLevel = 'High Risk';
-            riskColor = 'text-red-600';
-            riskIcon = 'alert-triangle';
-          } else if (fakeConfidence >= 60) {
-            riskLevel = 'Medium Risk';
-            riskColor = 'text-yellow-600';
-            riskIcon = 'eye';
-          } else if (fakeConfidence >= 40) {
-            riskLevel = 'Low Risk';
-            riskColor = 'text-blue-600';
-            riskIcon = 'shield';
+          if (data.message === 'Login successful') {
+            // Store the token
+            localStorage.setItem('token', data.token);
+            // Store user data
+            localStorage.setItem('userData', JSON.stringify({
+              email: data.user.email,
+              name: data.user.name,
+              role: data.user.role,
+              lastLogin: new Date().toISOString()
+            }));
+            // Redirect to signin.html
+            window.location.href = 'blank.html';
           } else {
-            riskLevel = 'Very Low Risk';
-            riskColor = 'text-green-600';
-            riskIcon = 'check-circle';
+            alert(data.message || 'Login failed. Please check your credentials.');
           }
-
-          const processingTime = ((Date.now() - startTime) / 1000).toFixed(1);
-          const confidenceLevel = Math.round(85 + Math.random() * 10);
-
-          this.analysisResult = {
-            fakeConfidence,
-            realConfidence,
-            riskLevel,
-            riskColor,
-            riskIcon,
-            analysisResults: averageResults,
-            individualResults: allResults,
-            timestamp: new Date().toISOString(),
-            imageCount: this.uploadedImages.length,
-            images: this.uploadedImages.map(img => ({
-              name: img.name,
-              size: img.size,
-              type: img.type
-            }))
-          };
-
-          this.displayResults(this.analysisResult, processingTime, confidenceLevel);
-
         } catch (error) {
-          console.error('Analysis failed:', error);
-          alert('Analysis failed. Please try again.');
-        } finally {
-          this.isAnalyzing = false;
-          this.updateAnalyzeButton();
+          console.error('Error during signin:', error);
+          alert('Error during signin. Please try again.');
         }
-      },
-
-      calculateAverageResults(allResults) {
-        const techniqueNames = Object.keys(allResults[0]);
-        const averageResults = {};
-        
-        techniqueNames.forEach(technique => {
-          const scores = allResults.map(result => result[technique].score);
-          const confidences = allResults.map(result => result[technique].confidence);
-          
-          const avgScore = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
-          const avgConfidence = confidences.reduce((a, b) => a + b, 0) / confidences.length;
-          
-          averageResults[technique] = {
-            score: avgScore,
-            details: `Average across ${allResults.length} images`,
-            confidence: avgConfidence
-          };
-        });
-        
-        return averageResults;
-      },
-
-      updateAnalyzeButton() {
-        const analyzeBtn = document.getElementById('analyzeBtn');
-        if (!analyzeBtn) return;
-        
-        if (this.isAnalyzing) {
-          analyzeBtn.innerHTML = `
-            <div class="animate-spin h-4 w-4 mr-2 border-2 border-white border-t-transparent rounded-full"></div>
-            Analyzing ${this.uploadedImages.length} Images...
-          `;
-          analyzeBtn.disabled = true;
-        } else {
-          analyzeBtn.innerHTML = `
-            <i data-lucide="zap" class="h-4 w-4 mr-2"></i>
-            Analyze ${this.uploadedImages.length} Images
-          `;
-          analyzeBtn.disabled = false;
-          lucide.createIcons();
-        }
-      },
-
-      displayResults(result, processingTime, confidenceLevel) {
-        // Update processing time and confidence level
-        const processingTimeEl = document.getElementById('processingTime');
-        const confidenceLevelEl = document.getElementById('confidenceLevel');
-        
-        if (processingTimeEl) {
-          processingTimeEl.textContent = processingTime + 's';
-        }
-        if (confidenceLevelEl) {
-          confidenceLevelEl.textContent = confidenceLevel + '%';
-        }
-
-        // Display main result
-        const mainResult = document.getElementById('mainResult');
-        if (mainResult) {
-          mainResult.innerHTML = `
-            <div class="flex items-center justify-center mb-3">
-              <i data-lucide="${result.riskIcon}" class="h-8 w-8 mr-3 ${result.riskColor}"></i>
-              <div class="text-center">
-                <div class="text-2xl font-bold text-gray-900 mb-1">
-                  ${result.fakeConfidence}%
-                </div>
-                <div class="text-sm font-semibold ${result.riskColor}">
-                  ${result.riskLevel}
-                </div>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-3 text-center">
-              <div>
-                <div class="text-lg font-bold text-red-600">
-                  ${result.fakeConfidence}%
-                </div>
-                <div class="text-xs text-gray-600">Fake/Manipulated</div>
-              </div>
-              <div>
-                <div class="text-lg font-bold text-green-600">
-                  ${result.realConfidence}%
-                </div>
-                <div class="text-xs text-gray-600">Authentic</div>
-              </div>
-            </div>
-            
-            <div class="text-center text-xs text-gray-500 mt-2">
-              Based on analysis of ${result.imageCount} processed images
-              ${result.images.length > 0 ? `
-                <br><span class="text-xs text-gray-400">
-                  Countries: ${[...new Set(result.images.map(img => img.country || 'Unknown'))].join(', ')}
-                </span>
-              ` : ''}
-            </div>
-          `;
-        }
-
-        // Display quick analysis
-        const quickAnalysis = document.getElementById('quickAnalysis');
-        if (quickAnalysis) {
-          const techniqueNames = {
-            jpegAnalysis: 'JPEG Analysis',
-            noiseAnalysis: 'Noise Pattern',
-            edgeAnalysis: 'Edge Detection',
-            lightingAnalysis: 'Lighting',
-            metadataAnalysis: 'Metadata',
-            frequencyAnalysis: 'Frequency',
-            colorAnalysis: 'Color',
-            textureAnalysis: 'Texture'
-          };
-
-          quickAnalysis.innerHTML = '';
-          Object.entries(result.analysisResults).forEach(([technique, result]) => {
-            const color = result.score > 70 ? 'red' : result.score > 40 ? 'yellow' : 'green';
-            const item = document.createElement('div');
-            item.className = 'flex items-center justify-between p-2 bg-gray-50 rounded text-xs';
-            item.innerHTML = `
-              <span class="font-medium">${techniqueNames[technique]}</span>
-              <div class="flex items-center">
-                <div class="w-12 bg-gray-200 rounded-full h-1 mr-2">
-                  <div class="bg-${color}-500 h-1 rounded-full" style="width: ${result.score}%"></div>
-                </div>
-                <span class="font-bold">${result.score}%</span>
-              </div>
-            `;
-            quickAnalysis.appendChild(item);
-          });
-        }
-
-        const analysisResults = document.getElementById('analysisResults');
-        if (analysisResults) {
-          analysisResults.style.display = 'block';
-        }
-        lucide.createIcons();
-      },
-
-      exportResults() {
-        if (!this.analysisResult) return;
-        
-        const exportData = {
-          ...this.analysisResult,
-          exportedAt: new Date().toISOString()
-        };
-        
-        const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `license_plate_analysis_${Date.now()}.json`;
-        a.click();
-        URL.revokeObjectURL(url);
-      },
-
-      openFullAnalysis() {
-        if (!this.analysisResult) {
-          alert('Please run an analysis first.');
-          return;
-        }
-        
-        // Store the analysis result in localStorage to pass to the full analysis page
-        localStorage.setItem('fullAnalysisData', JSON.stringify(this.analysisResult));
-        
-        // Navigate to the calendar page (which now contains the full analysis)
-        window.location.href = 'calendar.html';
-      }
-    }));
       });
-
-    document.getElementById('signin-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = {
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value
-      };
-      
-      try {
-        const res = await fetch('http://localhost:5001/signin', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-        });
-
-        const data = await res.json();
-        
-        if (data.message === 'Login successful') {
-          // Store the token
-          localStorage.setItem('token', data.token);
-          // Store user data
-          localStorage.setItem('userData', JSON.stringify(data.user));
-          // Redirect to profile page
-          window.location.href = 'profile.html';
-        } else {
-          alert(data.message);
-        }
-      } catch (error) {
-        console.error('Error during signin:', error);
-        alert('Error during signin. Please try again.');
-      }
-    });
     </script>
   </body>
 </html>

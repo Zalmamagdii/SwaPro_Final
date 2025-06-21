@@ -49,7 +49,7 @@
         if (this.imagePreviews.length === 0) return;
         
         try {
-          const response = await fetch('http://localhost:5000/process-image', {
+          const response = await fetch('https://swapro-app.bravewater-0ab9cb4d.uaenorth.azurecontainerapps.io/process-image', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -60,7 +60,7 @@
               model: this.selectedModel
             })
           });
-          
+        
           const results = await response.json();
           
           // Handle results
